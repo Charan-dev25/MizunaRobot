@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Robot Control</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root {
+  --bg:#0d1117;
+  --bg-alt:#161b22;
+  --border:#2a3036;
+  --border-soft:#30363d;
+  --accent:#238636;
+  --danger:#b32626;
+  --danger-hover:#c73737;
+  --text:#d0d6dc;
+  --muted:#8b949e;
+  --radius:14px;
+  --transition:.18s cubic-bezier(.4,.2,.2,1);
+  --shadow:0 2px 4px -2px #0007,0 8px 24px -8px #000a;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Arial,sans-serif;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:linear-gradient(140deg,#0d1117 0%,#101820 60%,#0e1419 100%);
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+header {
+  background:var(--bg-alt);
+  border-bottom:1px solid var(--border);
+  padding:.9rem 1.4rem;
+  display:flex;
+  justify-content:center;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+h1 {
+  margin:0;
+  font-size:1.08rem;
+  font-weight:600;
+  letter-spacing:.05em;
+  display:flex;
+  align-items:center;
+  gap:.55rem;
+}
+.badge {
+  background:var(--accent);
+  color:#fff;
+  font-size:.6rem;
+  padding:.25rem .45rem .22rem;
+  border-radius:4px;
+  letter-spacing:.07em;
+}
+.wrapper {
+  width:100%;
+  max-width:1250px;
+  margin:0 auto;
+  padding:1.2rem 1.4rem 2.2rem;
+  display:flex;
+  flex-wrap:wrap;
+  gap:1.5rem;
+  align-items:flex-start;
+}
+.panel {
+  background:var(--bg-alt);
+  border:1px solid var(--border-soft);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+.panel.tight { padding:0; }
+.panel.padded { padding:1.1rem 1.2rem 1.35rem; }
+.panel h2 {
+  margin:0 0 .9rem;
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.15em;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+.media {
+  position:relative;
+  width:100%;
+  aspect-ratio:4/3;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.media img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  filter:contrast(1.05) brightness(1.02);
+}
+.status-bar {
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  font-size:.65rem;
+  padding:.35rem .65rem .4rem;
+  background:linear-gradient(180deg,#0000,#000a 70%,#000d);
+  color:var(--muted);
+  letter-spacing:.05em;
+  display:flex;
+  justify-content:space-between;
+  gap:.6rem;
+}
+.status-bar span.flash { animation:flash .4s; }
+@keyframes flash { from { color:#58a6ff; } to { color:var(--muted); } }
+
+.grid-two {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:1.2rem 1.6rem;
+  width:100%;
+}
+.block {
+  display:flex;
+  flex-direction:column;
+  gap:.9rem;
+}
+.pad {
+  width:230px;
+  height:230px;
+  position:relative;
+  margin:auto;
+  display:grid;
+  place-items:center;
+}
+.pad button {
+  position:absolute;
+  width:70px;
+  height:70px;
+  border-radius:18px;
+  border:1px solid var(--border);
+  background:#1d242c;
+  color:#f4f6f8;
+  font-size:24px;
+  font-weight:500;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:var(--transition);
+  box-shadow:0 0 0 1px #000 inset,0 4px 10px -2px #000a;
+  user-select:none;
+}
+.pad button:hover { background:#27303a; transform:translateY(-3px); }
+.pad button:active { background:#39434e; transform:translateY(1px); }
+.pad button:focus-visible { outline:2px solid #3794ff; outline-offset:2px; }
+#btnF { top:10px; left:80px; }
+#btnB { bottom:10px; left:80px; }
+#btnL { left:10px; top:80px; }
+#btnR { right:10px; top:80px; }
+#btnS {
+  left:80px; top:80px;
+  background:var(--danger);
+}
+#btnS:hover { background:var(--danger-hover); }
+
+.controls {
+  display:flex;
+  flex-direction:column;
+  gap:1.15rem;
+}
+.row {
+  display:flex;
+  flex-wrap:wrap;
+  gap:.9rem;
+  align-items:center;
+}
+.range-wrap { display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; }
+label { font-size:.7rem; letter-spacing:.12em; font-weight:600; color:var(--muted); }
+input[type=range] {
+  width:240px;
+  accent-color:#3794ff;
+  cursor:pointer;
+}
+.tag {
+  background:#222d34;
+  border:1px solid var(--border);
+  padding:.4rem .65rem .42rem;
+  border-radius:8px;
+  font-size:.7rem;
+  min-width:48px;
+  text-align:center;
+  letter-spacing:.05em;
+}
+.btn {
+  background:#27303a;
+  border:1px solid var(--border);
+  color:#dfe5ec;
+  padding:.55rem 1.1rem .58rem;
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.1em;
+  border-radius:9px;
+  cursor:pointer;
+  transition:var(--transition);
+  text-transform:uppercase;
+}
+.btn:hover { background:#32404c; }
+.btn:active { background:#44525e; }
+.btn.danger { background:var(--danger); border-color:var(--danger); }
+.btn.danger:hover { background:var(--danger-hover); }
+.small-note {
+  font-size:.62rem;
+  line-height:1.35;
+  color:var(--muted);
+  letter-spacing:.06em;
+}
+footer {
+  margin-top:auto;
+  padding:1.2rem 1.4rem 1.8rem;
+  font-size:.6rem;
+  letter-spacing:.15em;
+  text-align:center;
+  color:#55626e;
+}
+
+@media (max-width:970px) {
+  .panel.media-panel { flex:1 1 100%; }
+  .panel.ctrl-panel { flex:1 1 100%; }
+  .pad { transform:scale(.9); }
+}
+@media (max-width:560px) {
+  .pad { transform:scale(.8); }
+  .range-wrap input[type=range] { width:200px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Robot Mizuna <span class="badge">LIVE</span></h1>
+</header>
+
+<div class="wrapper">
+
+  <!-- Camera Panel -->
+  <div class="panel media-panel" style="flex:1 1 520px; min-width:320px;">
+    <div class="media">
+      <img id="stream" src="/stream.mjpg" alt="Camera Stream">
+      <div class="status-bar">
+        <span id="status">Ready</span>
+        <span style="color:var(--muted);">↑ ↓ ← → / Space</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls Panel -->
+  <div class="panel ctrl-panel padded" style="flex:1 1 420px; min-width:320px;">
+    <h2>Controls</h2>
+    <div class="grid-two">
+      <div class="block">
+        <div class="pad">
+          <button id="btnF" data-cmd="F">▲</button>
+            <button id="btnB" data-cmd="B">▼</button>
+            <button id="btnL" data-cmd="L">◄</button>
+            <button id="btnR" data-cmd="R">►</button>
+            <button id="btnS" data-cmd="S">■</button>
+        </div>
+      </div>
+
+      <div class="block controls">
+        <div class="range-wrap">
+          <label for="speed">Speed</label>
+          <input type="range" id="speed" min="200" max="1023" value="{{ SPEED_DEFAULT }}"
+                 oninput="speedVal.textContent=this.value">
+          <div class="tag" id="speedVal">{{ SPEED_DEFAULT }}</div>
+        </div>
+        <div class="row">
+          <button class="btn" type="button" onclick="setSpeed()">Set Speed</button>
+          <button class="btn danger" type="button" onclick="sendCmd('S')">Stop</button>
+        </div>
+        <div class="small-note">
+          Hold button / arrow key to move. Release to auto stop.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>Mizuna</footer>
+
+<script>
+function qs(s){ return document.querySelector(s); }
+function ev(e){ e.preventDefault(); }
+async function postJSON(url,data){
+  try{
+    const r = await fetch(url,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(data)
+    });
+    if(!r.ok) throw new Error(r.status);
+    return await r.json();
+  }catch(err){
+    setStatus('Error '+err,true);
+  }
+}
+function setStatus(t,err=false){
+  const s=qs('#status');
+  s.textContent=t;
+  s.classList.add('flash');
+  s.style.color = err ? '#ff6b6b' : 'var(--muted)';
+  setTimeout(()=>s.classList.remove('flash'),400);
+}
+async function sendCmd(c){
+  setStatus('Cmd '+c);
+  await postJSON('/cmd',{cmd:c});
+}
+async function setSpeed(){
+  const v=qs('#speed').value;
+  setStatus('Speed '+v);
+  await postJSON('/speed',{speed:v});
+}
+document.querySelectorAll('.pad button').forEach(b=>{
+  b.addEventListener('click', ()=>sendCmd(b.dataset.cmd));
+  b.addEventListener('pointerdown', ()=>sendCmd(b.dataset.cmd));
+  b.addEventListener('pointerup', ()=>sendCmd('S'));
+  b.addEventListener('pointerleave', ()=>sendCmd('S'));
+  b.addEventListener('touchend', ()=>sendCmd('S'));
+});
+document.addEventListener('keydown', e=>{
+  if(e.repeat) return;
+  if(e.key==='ArrowUp') sendCmd('F');
+  else if(e.key==='ArrowDown') sendCmd('B');
+  else if(e.key==='ArrowLeft') sendCmd('L');
+  else if(e.key==='ArrowRight') sendCmd('R');
+  else if(e.key===' ') sendCmd('S');
+});
+document.addEventListener('keyup', e=>{
+  if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key)) sendCmd('S');
+});
+</script>
+</body>
+</html>
