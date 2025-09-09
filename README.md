@@ -45,8 +45,8 @@ This repository is organized into several key sections. Use the following guides
 
 - [Materials Required](./Materials.md) — Complete bill of materials with images and descriptions.
 - [Assembly Instructions](./Assembly.md) — Step-by-step mechanical and wiring guide for building Mizuna.
-- [Mizuna App Guide (Mobile)](mizuna-app/README.md) — Features, screens, configuration, and troubleshooting for the Expo/React Native mobile app.
-- [Raspberry Pi Robot Guide](mizuna/README.md) — Setup, API endpoints, LED/motor behavior, and autostart for the robot code running on the Pi.
+- [Mizuna App Guide (Mobile)](./Assembly.md) — Features, screens, configuration, and troubleshooting for the Expo/React Native mobile app.
+- [Raspberry Pi Robot Guide](./Assembly.md) — Setup, API endpoints, LED/motor behavior, and autostart for the robot code running on the Pi.
 
 ---
 
@@ -54,16 +54,17 @@ This repository is organized into several key sections. Use the following guides
 
 1. **Review [Materials.md](./Materials.md)** and gather all required hardware.
 2. **Follow [Assembly.md](./Assembly.md)** to build and wire the robot.
-3. **Set up the Raspberry Pi** using [mizuna/README.md](mizuna/README.md).
-4. **Install and configure the mobile app** using [mizuna-app/README.md](mizuna-app/README.md).
+3. **Set up the Raspberry Pi** using [Assembly.md](./Assembly.md).
+4. **Install and configure the mobile app** using [Assembly.md](./Assembly.md).
 5. Power on, connect, and enjoy your new AI companion!
-
+6. Add Omi Friend Integration [Omi](/omi/omi.md) (optional)
 ---
 
 ## 📂 Directory Structure
 
 - `mizuna/` — Python backend and robot control code for Raspberry Pi
 - `mizuna-app/` — Expo/React Native mobile app for Mizuna
+- `omi` — Omi Friend Integration
 - `assets/` — Images of hardware components
 - `circuit_diagrams/` — Circuit and wiring diagrams
 - `Materials.md` — Hardware bill of materials

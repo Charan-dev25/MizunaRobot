@@ -1,6 +1,6 @@
 # Omi Friend Device Integration
 
-This document explains how to integrate the Omi Friend Device with the Mizuna AI Companion Robot. The Omi Friend Device is a wearable audio recorder that captures conversations and environmental audio, which Mizuna uses to understand user routines, extract tasks, and provide personalized assistance.
+This document explains how to integrate the Omi Friend Device with the Mizuna AI Companion Robot. [The Omi Friend Device](https://www.omi.me/) is a wearable audio recorder that captures conversations and environmental audio, which Mizuna uses to understand user routines, extract tasks, and provide personalized assistance.
 
 ## Overview
 
