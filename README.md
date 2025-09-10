@@ -1,5 +1,5 @@
 # Mizuna - AI Companion Pet Robot
-
+![Mizuna](/assets/mizuna.png)
 > **An intelligent AI companion robot powered by GPT-OSS 20B for personalized daily assistance and home monitoring.**
 
 Meet Mizuna—your chatty little side-kick on wheels. Instead of just running apps or flashing LEDs, Mizuna sits nearby, listens to your everyday conversations through the Omi Friend Device, and figures out how to make your life smoother: jotting down tasks, lining up reminders, and suggesting breaks when you sound stressed. At the same time, its onboard sensors keep a gentle watch over your room, alerting you to motion or changes in temperature so you always feel safe and informed. Everything happens locally on an open-source GPT-OSS 20B brain, so your memories stay yours, and Mizuna’s personality is yours to tweak—from energetic morning motivator to laid-back evening storyteller. In short, it’s not just a robot—it’s the friend who’s always excited to help.

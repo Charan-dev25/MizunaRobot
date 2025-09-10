@@ -31,7 +31,7 @@ This document provides concise, actionable assembly, wiring, and first‑run ins
 11. Attach the Motors to the Motor Shield and Battery to Motor Shield as follows
 ![Motor](/circuit_diagrams/motor.jpeg)
 
-11. Install camera at front face; align lens with face opening and do the following wiring with the raspberry pi
+11. Install camera at front face; align lens with face opening and do the following wiring with the raspberry pi and connect the speakers
 ![Raspberry Pi](/circuit_diagrams/raspberry_pi.png)
 
 12. Attach LED strips/matrix and OLED where visible on the box or chasis.
