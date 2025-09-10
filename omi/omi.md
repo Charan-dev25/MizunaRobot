@@ -27,7 +27,7 @@ This can be hosted on any cloud of your choice. Just add your hosted enpoint in 
 Create a virtual environment and install the required packages:
 
 ```bash
-git clone 
+git clone https://github.com/cyrixninja/MizunaRobot
 cd Mizuna-Companion-Robot/omi
 python3 -m venv venv
 source venv/bin/activate
@@ -44,4 +44,4 @@ MONGODB_COLLECTION=events
 
 ### 3 . Run the Flask Server
 
-Start the server and add its  enpoint your omi app
+Start the server and add its endpoint your omi app
