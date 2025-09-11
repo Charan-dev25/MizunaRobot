@@ -32,11 +32,11 @@ cd Mizuna-Companion-Robot/omi
 python3 -m venv venv
 source venv/bin/activate
 pip install flask pymongo python-dotenv
-
+```
 
 ### 2. Configure Environment Variables
 Create a .env file in the omi/ directory:
-```
+
 MONGODB_URI=mongodb://localhost:27017  # Or your MongoDB Atlas URI
 MONGODB_DB=mizuna_companion
 MONGODB_COLLECTION=events
