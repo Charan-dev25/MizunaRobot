@@ -268,34 +268,32 @@ def conversation_mode():
 
 def main():
     print("Starting Mizuna Assistant...")
-    
     # Initialize LEDs - turn off
     set_led_state('off')
     time.sleep(0.5)
-    
+
     # Startup sequence - cycle through colors
     print("LED startup sequence...")
     for state in ['listening', 'wake_detected', 'conversation', 'thinking', 'speaking']:
         set_led_state(state)
         time.sleep(0.5)
-    
+
     set_led_state('off')
     time.sleep(0.5)
-    
+
     try:
-        while True:
-            # Listen for wake word
-            if listen_for_wake_word():
-                # Enter conversation mode
-                conversation_mode()
-                
-                # Brief pause with LEDs off before returning to wake word detection
-                set_led_state('off')
-                time.sleep(1)
-                
+         while True:
+             # Listen for wake word
+             if listen_for_wake_word():
+             # Enter conversation mode
+             conversation_mode()
+
+             # Brief pause with LEDs off before returning to wake word detection
+             set_led_state('off')
+             time.sleep(1)
+
     except KeyboardInterrupt:
         print("Exiting...")
         set_led_state('off')  # Turn off LEDs when exiting
-
-if __name__ == "__main__":
-    main()
+if name == "main":
+   main()
